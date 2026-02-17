@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプル家計簿</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts for a premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>シンプル家計簿</h1>
+        </header>
+
+        <!-- Summary & Budget Section -->
+        <section class="summary-section">
+            <div class="month-selector">
+                <input type="month" id="month-picker">
+            </div>
+
+            <div class="budget-container">
+                <div class="budget-input-group">
+                    <label for="monthly-budget">今月の予算:</label>
+                    <input type="number" id="monthly-budget" placeholder="予算を設定">
+                </div>
+                <div id="budget-status" class="budget-status">
+                    <!-- JS will update this -->
+                </div>
+                <div id="budget-alert" class="budget-alert" style="display: none;">
+                    ⚠️ 予算オーバーです！
+                </div>
+            </div>
+
+            <div class="summary-cards">
+                <div class="card income-card">
+                    <h3>収入</h3>
+                    <p id="total-income">¥0</p>
+                </div>
+                <div class="card expense-card">
+                    <h3>支出</h3>
+                    <p id="total-expense">¥0</p>
+                </div>
+                <div class="card balance-card">
+                    <h3>残高</h3>
+                    <p id="total-balance">¥0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="chart-section">
+            <div class="chart-container">
+                <canvas id="balance-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="category-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Advice Section -->
+        <section id="advice-section" class="advice-section" style="display: none;">
+            <div id="advice-container" class="advice-bubble">
+                <!-- JS will update advice -->
+            </div>
+        </section>
+
+        <section class="input-section">
+            <div class="form-group">
+                <label for="date">日付</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="form-group toggle-group">
+                <input type="radio" id="expense" name="type" value="expense" checked>
+                <label for="expense" class="toggle-label expense-label">支出</label>
+
+                <input type="radio" id="income" name="type" value="income">
+                <label for="income" class="toggle-label income-label">収入</label>
+            </div>
+
+            <div class="form-group">
+                <label for="category">カテゴリ</label>
+                <select id="category">
+                    <option value="食費">食費</option>
+                    <option value="交通費">交通費</option>
+                    <option value="日用品">日用品</option>
+                    <option value="光熱費">光熱費</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">金額 (円)</label>
+                <input type="number" id="amount" placeholder="0" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="memo">メモ</label>
+                <input type="text" id="memo" placeholder="例: スーパー、電車など">
+            </div>
+
+            <button id="add-btn">追加する</button>
+        </section>
+
+        <section class="list-section">
+            <h2>履歴</h2>
+            <ul id="entry-list">
+                <!-- Data will be added here by JS -->
+            </ul>
+        </section>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('SW registered!', reg))
+                .catch(err => console.log('SW registration failed', err));
+        }
+    </script>
+</body>
+
+</html>
