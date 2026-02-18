@@ -39,6 +39,10 @@
             </div>
 
             <div class="summary-cards">
+                <div class="card balance-card">
+                    <h3>残高</h3>
+                    <p id="total-balance">¥0</p>
+                </div>
                 <div class="card income-card">
                     <h3>収入</h3>
                     <p id="total-income">¥0</p>
@@ -46,10 +50,6 @@
                 <div class="card expense-card">
                     <h3>支出</h3>
                     <p id="total-expense">¥0</p>
-                </div>
-                <div class="card balance-card">
-                    <h3>残高</h3>
-                    <p id="total-balance">¥0</p>
                 </div>
             </div>
         </section>
@@ -115,6 +115,9 @@
                 <!-- Data will be added here by JS -->
             </ul>
         </section>
+
+        <!-- Floating Action Button -->
+        <a href="#add-btn" class="fab">+</a>
     </div>
     <script src="script.js"></script>
     <script>
